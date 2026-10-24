@@ -1,0 +1,112 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
+}
+
+group = 'cn.blockforge.outofspec'
+version = project.mod_version
+
+base {
+    archivesName = 'OUT_OF_SPEC_BindingContracts_Stage5_3_25_ContactAwareHandPoses'
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+    copyIdeResources = true
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.minecraftforge.net' }
+    maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:1.20.1-${project.forge_version}"
+    // The bundled Stage 1.1 baseline contains the Iron's Spells API classes used by this add-on.
+    // This keeps a plain `gradle clean build` usable from the extracted ZIP root.
+    compileOnly files('baseline/OUT_OF_SPEC_RPG_IronSpell_SAO_Mobility_Stage1_1.jar')
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+}
+
+mixin {
+    add sourceSets.main, 'out_of_spec_binding.refmap.json'
+    config 'out_of_spec_binding.mixins.json'
+    config 'out_of_spec_binding.client.mixins.json'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 17
+}
+
+processResources {
+    def props = [mod_id: 'out_of_spec_binding', mod_name: 'OUT OF SPEC RPG Spell Growth',
+                 mod_version: project.mod_version, minecraft_version: '1.20.1',
+                 forge_version_range: '[47.4.0,48)', irons_spellbooks_version: '[1.20.1-3.16.3,]']
+    inputs.properties props
+    filteringCharset = 'UTF-8'
+    filesMatching('META-INF/mods.toml') { expand props }
+}
+
+jar {
+    // The standalone binding add-on is an intermediate artifact only. Keep it
+    // out of build/libs so that folder contains the single merged installable JAR.
+    destinationDirectory.set(layout.buildDirectory.dir('intermediate-addon'))
+    manifest { attributes(['MixinConfigs': 'out_of_spec_binding.mixins.json,out_of_spec_binding.client.mixins.json']) }
+    finalizedBy('reobfJar')
+}
+
+
+// Produce the final installable Stage 1.1 + OUT OF SPEC add-on JAR without any third-party first-person arm-renderer runtime dependency as part of `gradle build`.
+// The merger is a tiny JDK-only Java tool, so Python is not required on the user's machine.
+def baseStage11Jar = layout.projectDirectory.file('baseline/OUT_OF_SPEC_RPG_IronSpell_SAO_Mobility_Stage1_1.jar').asFile
+def addonJarFile = layout.buildDirectory.file("intermediate-addon/${base.archivesName.get()}-${project.version}.jar").get().asFile
+def mergedStage11Jar = layout.buildDirectory.file('libs/OUT_OF_SPEC_RPG_IronSpell_SAO_Stage5_3_25_ContactAwareHandPoses.jar').get().asFile
+def mergerClassesDir = layout.buildDirectory.dir('jar-merger-classes')
+def mergerSourceFile = layout.projectDirectory.file('tools/Stage11JarMerger.java')
+
+tasks.register('compileJarMerger', JavaCompile) {
+    group = 'build setup'
+    description = 'Compiles the JDK-only Stage 1.1 JAR merger.'
+    source = files(mergerSourceFile)
+    classpath = files()
+    destinationDirectory.set(mergerClassesDir)
+    options.encoding = 'UTF-8'
+    options.release = 17
+    // Stage11JarMerger is a single self-contained JDK-only source file.
+    // Do not pass -sourcepath in compilerArgs: modern Gradle reserves that option
+    // for CompileOptions.sourcepath and fails during task initialization.
+}
+
+tasks.register('mergeStage1_1') {
+    group = 'build'
+    description = 'Merges the OUT OF SPEC standalone hands and contact-aware seal pose add-on into a new copy of Stage 1.1.'
+    dependsOn tasks.named('reobfJar'), tasks.named('compileJarMerger')
+    doLast {
+        if (!baseStage11Jar.isFile()) {
+            throw new GradleException("Bundled Stage 1.1 baseline was not found: ${baseStage11Jar}")
+        }
+        javaexec {
+            classpath = files(mergerClassesDir)
+            mainClass.set('Stage11JarMerger')
+            args baseStage11Jar.absolutePath, addonJarFile.absolutePath, mergedStage11Jar.absolutePath
+        }
+        if (!mergedStage11Jar.isFile() || mergedStage11Jar.length() < 1024L * 1024L) {
+            throw new GradleException("Merged installable JAR was not created or is unexpectedly small: ${mergedStage11Jar}")
+        }
+        // ForgeGradle may leave the reobfuscated 46 KB add-on in build/libs. Keep only the
+        // merged Stage 1.1 + Stage 4 artifact there so users cannot accidentally install both.
+        fileTree(layout.buildDirectory.dir('libs').get().asFile).matching { include '*.jar' }.files.each { jarFile ->
+            if (jarFile.canonicalFile != mergedStage11Jar.canonicalFile) jarFile.delete()
+        }
+    }
+}
+
+tasks.named('build') {
+    dependsOn tasks.named('mergeStage1_1')
+}

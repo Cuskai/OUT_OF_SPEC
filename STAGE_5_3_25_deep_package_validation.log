@@ -1,0 +1,7 @@
+PASS package config: parsed 12 resource JSON files
+PASS visual assets: editable SVG parsed; 256x256 alpha PNG packaged
+PASS package config: expanded mods.toml parses and declares only OUT OF SPEC
+PASS bilateral standalone hand integration: end-of-frame draws both sides unconditionally and flushes custom vertices
+PASS build identity: Stage 5.3.25 contact-aware hand pose and two-hand interaction lock, Java 17, output path and no Punchy runtime/build dependency
+PASS package baseline: Stage 1.1 payload intact (SHA-256 ebb72ec47f22b64fbac3ab58ff96f9d0df5fe276638bb3cb57bf3b1832fd1fda)
+PASS deep standalone merge fixture: JDK merger compiled; standalone mod and mixins merged; baseline CRC/size and critical classes preserved; no Punchy metadata

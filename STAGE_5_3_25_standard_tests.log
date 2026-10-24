@@ -1,0 +1,385 @@
+PASS every registered spell receives a growth profile, including add-on and disabled entries (expected=130, actual=130)
+PASS runtime registry count matches fake spell registry (expected=130, actual=130)
+PASS Firebolt is lower tier (profile exists)
+PASS Firebolt is lower tier (expected=LOWER, actual=LOWER)
+PASS Magic Arrow is middle tier (profile exists)
+PASS Magic Arrow is middle tier (expected=MIDDLE, actual=MIDDLE)
+PASS Fireball is middle tier by design in this version (profile exists)
+PASS Fireball is middle tier by design in this version (expected=MIDDLE, actual=MIDDLE)
+PASS Lightning Lance is upper tier (profile exists)
+PASS Lightning Lance is upper tier (expected=UPPER, actual=UPPER)
+PASS registered spatial portal receives a profile
+PASS spatial portal is graded by scope, not damage (expected=SUPER, actual=SUPER)
+PASS registered healing spell receives a profile
+PASS third-party spell namespace is included
+PASS flattening-collision spell keys stay distinct
+PASS unregistered spells do not get fabricated profiles (expected=null, actual=null)
+PASS profile spell ID is unique: irons_spellbooks:fireball
+PASS every profile has a seal sequence: irons_spellbooks:fireball
+PASS profile spell ID is unique: irons_spellbooks:firebolt
+PASS every profile has a seal sequence: irons_spellbooks:firebolt
+PASS profile spell ID is unique: irons_spellbooks:lightning_lance
+PASS every profile has a seal sequence: irons_spellbooks:lightning_lance
+PASS profile spell ID is unique: irons_spellbooks:magic_arrow
+PASS every profile has a seal sequence: irons_spellbooks:magic_arrow
+PASS profile spell ID is unique: addon:a_b
+PASS all 421 spell-growth catalog assertions across 130 profiles.
+PASS all 4502 generated sequence stress assertions.
+PASS 1% loss for 12% casting movement remains unbalanced => UNBALANCED ratio=0.1
+PASS 20% spell-power loss for 12% movement accepted => ACCEPTED ratio=1.3
+PASS all-spell scope supported => ACCEPTED ratio=1.3
+PASS cast time is a valid cost => ACCEPTED ratio=1.3
+PASS small cost still rejected by valuation => UNBALANCED ratio=0.6
+PASS mana can pay for cooldown benefit => ACCEPTED ratio=2.0
+PASS unfair resource trade remains rejected => UNBALANCED ratio=0.7
+PASS long cooldown can pay for mana saving => ACCEPTED ratio=1.4
+PASS local AI candidate: mana-for-cooldown trade is executable => ACCEPTED ratio=2.0
+PASS local AI candidate: cooldown-for-mana trade is executable => ACCEPTED ratio=1.4
+PASS local AI candidate: cast-time trade is executable => ACCEPTED ratio=1.9
+PASS local AI candidate: casting mobility trade is executable => ACCEPTED ratio=1.3
+PASS local AI candidate: visibility trade is executable => ACCEPTED ratio=27.3
+PASS named spell casting mobility trade remains supported => ACCEPTED ratio=1.3
+PASS a stronger resource cost can buy a moderate global cast-time benefit => ACCEPTED ratio=3.3
+PASS 40% cooldown cost can fund a moderate casting-mobility reward => ACCEPTED ratio=1.3
+PASS irreversible insomnia can fund a persistent cast-time reward => ACCEPTED ratio=30.4
+PASS a persistent visibility effect can be bought with an irreversible burden => ACCEPTED ratio=40.9
+PASS a spell-scoped permanent movement burden can fund a targeted one-shot reward => ACCEPTED ratio=1.7
+PASS mana cost can fund a persistent visibility reward => ACCEPTED ratio=2.6
+PASS power sacrifice can fund a moderate cooldown benefit => ACCEPTED ratio=1.7
+PASS large cooldown cost supports a stronger mana-saving trade without arbitrary caps => ACCEPTED ratio=2.2
+PASS a single reward is not a trade => UNSUPPORTED ratio=0
+PASS 200% mana cost no longer hits arbitrary cap => ACCEPTED ratio=14.8
+PASS 20% power loss for 10% cast-time improvement accepted => ACCEPTED ratio=1.9
+PASS duplicate stat requires clarification => UNRECOGNIZED ratio=0
+PASS named scope is not applied to a non-damage attribute => UNSUPPORTED ratio=0
+PASS unsupported delayed trigger is not ignored => UNSUPPORTED ratio=0
+PASS supported health-threshold condition is accepted => ACCEPTED ratio=1.3
+PASS teleport remains explicitly unsupported => UNSUPPORTED ratio=0
+PASS permanent slow buys one-shot Lightning Lance damage => ACCEPTED ratio=1.3
+PASS offline AI fallback candidate: Fireball one-shot trade is locally executable => ACCEPTED ratio=1.3
+PASS offline AI fallback candidate: permanent insomnia is locally executable => ACCEPTED ratio=1.2
+PASS offline AI fallback candidate: all-spell one-shot trade is locally executable => ACCEPTED ratio=1.3
+PASS offline AI fallback candidate: one-use spell trade is locally executable => ACCEPTED ratio=1.3
+PASS permanent+one-shot structured fields are parsed
+PASS one cast restriction buys 10x damage on that cast => ACCEPTED ratio=2.1
+PASS one-use spell lock is independent from reward scope
+PASS movement reward above the former 25% cap is allowed => ACCEPTED ratio=1.2
+PASS spell power reward above the former 50% cap is allowed => ACCEPTED ratio=1.8
+PASS timed contracts supported => ACCEPTED ratio=1.3
+PASS timed duration is encoded in Minecraft ticks
+PASS extreme persistent damage reward still requires a stronger cost => UNBALANCED ratio=0.0
+PASS implemented damage effect can be evaluated as an actual trade => ACCEPTED ratio=1.5
+PASS unimplemented flat-unit cooldown phrasing remains rejected => UNSUPPORTED ratio=0
+PASS the exact one-use spell-seal wording from the screenshot is recognized and balanced => ACCEPTED ratio=1.3
+PASS exact screenshot phrase stores the correct cost ID, reward scope, 100x multiplier and next-cast lifetime
+PASS generic named spell seal works for Fireball, not just Lightning Lance => ACCEPTED ratio=1.3
+PASS named Chinese spell scope matches Fireball and excludes Lightning Lance
+PASS generic Chinese spell-name resolver selects Fireball as both cost and reward target
+PASS English spell name resolves for both cost and reward scopes => ACCEPTED ratio=1.3
+PASS English names resolve to the same canonical ID as localized Chinese names
+PASS longer spell names suppress misleading contained-name matches
+PASS permanent cost can target any supported spell name => ACCEPTED ratio=1.3
+PASS unnamed next-cast damage reward defaults to all spells
+PASS explicit all-spell scope matches both Fireball and Lightning Lance
+PASS explicit all-spell reward remains global, not confused with the cost spell
+PASS cost spell and reward spell remain independent, and unrelated seal does not subsidize 100x reward
+PASS ambiguous multi-spell scope is rejected instead of silently choosing one
+PASS spell canonicalizer accepts Chinese names, English names and registry IDs
+PASS permanent insomnia cost parses as an irreversible burden and survives clear/death by NBT design
+PASS explicit permanent reward has a distinct permanent lifetime mode
+PASS continuous/revocable lifetime is distinguished from irreversible permanent lifetime
+PASS permanent cast-time movement cost is a real scoped cost and remains independent of one-shot reward
+PASS cast-time move speed reduced to 20% is parsed correctly while Firebolt damage scope remains named
+PASS permanent cast-speed cost does not silently make an ambiguous damage reward permanent
+PASS low-health activation condition is parsed into the contract
+PASS seal-count stacking reward is permanent and separately recorded
+PASS timed contract with delayed spell seal parses its duration and target
+PASS immediate permanent seal of spell A can fund a one-shot reward on spell B
+PASS ambiguous reward lifetime is rejected instead of silently treated as persistent
+PASS timed/permanent benefit conflict is rejected
+PASS continuous/timed benefit conflict is rejected
+PASS unknown spell name cannot be treated as a valid irreversible cost
+PASS exact screenshot wording: permanent lose-sleep-ability cost + Thunder Lance base damage increased by 200% => 300% base, permanent
+PASS lose ability to sleep alias is recognized and supports named permanent damage benefit => ACCEPTED ratio=2.4
+PASS alternate no-sleep wording is recognized => ACCEPTED ratio=2.4
+PASS paraphrase guard accepts equivalent amount/scope/lifetime wording
+PASS paraphrase guard rejects old/foreign target spell contamination
+PASS Stage 3.6: one-successful-hit wording accepted as supported next-cast lifetime
+PASS Stage 3.6: casting movement speed lowered to 20% of normal parses as -80% for Firebolt
+PASS Stage 3.6: permanent insomnia + damage permanently increased by 300% yields 4x damage
+PASS Stage 3.6: permanent Magic Arrow seal funds separate permanent Lightning Lance 4x damage
+PASS Stage 3.7: permanent Slowness I + one-shot Firebolt 300%-of-base reward parses
+PASS Stage 3.7: exact 10-second full cast-root vs 3x Firebolt is accepted with transparent scores
+PASS Stage 3.7: 80% cast movement penalty remains distinct from a complete root
+PASS Stage 3.8: server-enforced spell-scoped sneak/still preparation is structured separately from contract duration
+PASS Stage 3.8: the same request reproduces the same canonical contract
+PASS Stage 3.8: canonical contract equality detects changed executable fields
+PASS unsupported bilateral player contract fails closed => UNSUPPORTED ratio=0
+PASS unsupported hand seals and chant are not silently treated as ordinary casts => UNSUPPORTED ratio=0
+PASS unsupported breach consequence fails closed => UNSUPPORTED ratio=0
+PASS conflicting term deadlines fail closed rather than sharing one timer => UNSUPPORTED ratio=0
+PASS preparation duration outside safe representable bounds fails closed => UNSUPPORTED ratio=0
+PASS single-spell cooldown scope is refused while cooldown remains global-only => explicit unsupported-scope refusal
+PASS single-spell cast-time scope is refused while cast time remains global-only => explicit unsupported-scope refusal
+PASS single-spell mana-cost scope is refused while mana cost remains global-only => explicit unsupported-scope refusal
+PASS single-spell visibility scope is refused while visibility remains global-only => explicit unsupported-scope refusal
+PASS global cooldown scope remains supported even when another cost names a sealed spell => ACCEPTED ratio=29.0
+PASS Stage 3.8: open-ended AI proposal can introduce a new spell combination
+PASS Stage 3.8: exact explicit spell scope is preserved
+PASS Stage 3.8: AI candidate cannot silently substitute an explicitly named reward spell
+PASS Stage 3.8: AI candidate cannot silently drop part of an explicit spell scope
+PASS Stage 3.8: open-ended proposal can choose a different spell than an explicitly excluded target
+PASS Stage 3.8: AI cannot reintroduce a spell explicitly excluded by the current request
+PASS Stage 3.8: explicit exclusions take precedence over contradictory positive mentions
+PASS all 106 contract assertions
+PASS exactly twelve base seals (expected=12, actual=12)
+PASS default key suggestions are unique: ZI
+PASS stable seal ID round-trip ZI (expected=ZI, actual=ZI)
+PASS default key suggestions are unique: CHOU
+PASS stable seal ID round-trip CHOU (expected=CHOU, actual=CHOU)
+PASS default key suggestions are unique: YIN
+PASS stable seal ID round-trip YIN (expected=YIN, actual=YIN)
+PASS default key suggestions are unique: MAO
+PASS stable seal ID round-trip MAO (expected=MAO, actual=MAO)
+PASS default key suggestions are unique: CHEN
+PASS stable seal ID round-trip CHEN (expected=CHEN, actual=CHEN)
+PASS default key suggestions are unique: SI
+PASS stable seal ID round-trip SI (expected=SI, actual=SI)
+PASS default key suggestions are unique: WU
+PASS stable seal ID round-trip WU (expected=WU, actual=WU)
+PASS default key suggestions are unique: WEI
+PASS stable seal ID round-trip WEI (expected=WEI, actual=WEI)
+PASS default key suggestions are unique: SHEN
+PASS stable seal ID round-trip SHEN (expected=SHEN, actual=SHEN)
+PASS default key suggestions are unique: YOU
+PASS stable seal ID round-trip YOU (expected=YOU, actual=YOU)
+PASS default key suggestions are unique: XU
+PASS stable seal ID round-trip XU (expected=XU, actual=XU)
+PASS default key suggestions are unique: HAI
+PASS stable seal ID round-trip HAI (expected=HAI, actual=HAI)
+PASS seal IDs normalize case and surrounding spaces (expected=ZI, actual=ZI)
+PASS sequence takes an immutable defensive copy (expected=2, actual=2)
+PASS short sequence is a strict prefix
+PASS long sequence cannot prefix a short sequence
+PASS canonical sequence excludes keybindings/localization (expected=zi.chou.yin, actual=zi.chou.yin)
+PASS empty sequence rejected
+PASS oversize sequence rejected
+PASS exact recipe plus longer-prefix ambiguity is represented explicitly (expected=EXACT_AND_PREFIX, actual=EXACT_AND_PREFIX)
+PASS exact match IDs (expected=[out_of_spec:recipe/fireball_short], actual=[out_of_spec:recipe/fireball_short])
+PASS longer prefix IDs (expected=[out_of_spec:recipe/fireball_long], actual=[out_of_spec:recipe/fireball_long])
+PASS prefix-only state (expected=PREFIX_ONLY, actual=PREFIX_ONLY)
+PASS non-matching sequence (expected=NONE, actual=NONE)
+PASS frozen registry rejects later mutation
+PASS same exact base sequence cannot randomly choose a spell
+PASS original recipe remains registered after ambiguous add was rejected
+PASS same sequence can mean different additions in different recipe contexts (expected=[out_of_spec:additional/area], actual=[out_of_spec:additional/area])
+PASS context resolves additional sequence (expected=[out_of_spec:additional/track], actual=[out_of_spec:additional/track])
+PASS ambiguous additional sequence for same recipe rejected
+PASS special effect cannot freeze without a registered executor
+PASS registry accepts special definition only when adapter declares its executor registered
+PASS registry rejects contradictory required-versus-conflicting composition rules
+PASS invalid unit/operation/parameter tuple rejected
+PASS NaN rejected
+PASS zero multiplier is representable for full suppression or zero cost (expected=0.0, actual=0.0)
+PASS cast-movement multiplier permits a real full-root cost (expected=0.0, actual=0.0)
+PASS negative multiplier rejected
+PASS unstable contribution ID rejected
+PASS valid plan accepted: server-resolved cast plan
+PASS plan resolves real spell identity (expected=irons_spellbooks:fireball, actual=irons_spellbooks:fireball)
+PASS caster identity is derived from trusted server context (expected=22222222-2222-2222-2222-222222222222, actual=22222222-2222-2222-2222-222222222222)
+PASS plan preserves selected additional-seal order for audit (expected=[out_of_spec:additional/area, out_of_spec:additional/split], actual=[out_of_spec:additional/area, out_of_spec:additional/split])
+PASS two additional effects plus applicable binding effects only (expected=4, actual=4)
+PASS first selected addition occurrence index (expected=0, actual=0)
+PASS first occurrence of a distinct additional seal (expected=0, actual=0)
+PASS unrelated spell-scoped binding effect not applied
+PASS plan fingerprint is SHA-256 (expected=64, actual=64)
+PASS server tick recorded for diagnostics (expected=900, actual=900)
+PASS unknown recipe rejected (expected=UNKNOWN_RECIPE, actual=UNKNOWN_RECIPE)
+PASS unknown add-on ID is explicitly rejected (expected=UNKNOWN_ADDITIONAL_SEAL, actual=UNKNOWN_ADDITIONAL_SEAL)
+PASS known add-on registered for another spell is rejected (expected=INCOMPATIBLE_ADDITIONAL_SEAL, actual=INCOMPATIBLE_ADDITIONAL_SEAL)
+PASS duplicate addition cannot stack by default (expected=OCCURRENCE_LIMIT_EXCEEDED, actual=OCCURRENCE_LIMIT_EXCEEDED)
+PASS missing required addition rejected (expected=REQUIRED_ADDITIONAL_SEAL_MISSING, actual=REQUIRED_ADDITIONAL_SEAL_MISSING)
+PASS incompatible additions rejected (expected=CONFLICTING_ADDITIONAL_SEALS, actual=CONFLICTING_ADDITIONAL_SEALS)
+PASS invalid server tick rejected by trusted context construction
+PASS untrusted cast request has no caster identity, active-contract or effect-value fields
+PASS duplicate active contract IDs rejected in server-derived snapshot
+PASS explicitly repeatable additional seal can be selected up to its declared count
+PASS each authorized occurrence has a separate effect application (expected=2, actual=2)
+PASS first repeat occurrence index (expected=0, actual=0)
+PASS second repeat occurrence index (expected=1, actual=1)
+PASS repeat applications get distinct idempotency keys
+PASS effect from inactive contract rejected (expected=INVALID_BINDING_EFFECT, actual=INVALID_BINDING_EFFECT)
+PASS binding channel cannot carry an additional-seal source (expected=INVALID_BINDING_EFFECT, actual=INVALID_BINDING_EFFECT)
+PASS duplicate server-side binding contribution rejected (expected=DUPLICATE_BINDING_CONTRIBUTION, actual=DUPLICATE_BINDING_CONTRIBUTION)
+PASS same contract cannot reuse one contribution ID across cost and reward (expected=DUPLICATE_BINDING_CONTRIBUTION, actual=DUPLICATE_BINDING_CONTRIBUTION)
+PASS unfrozen registry cannot resolve plans (expected=REGISTRY_NOT_FROZEN, actual=REGISTRY_NOT_FROZEN)
+PASS fingerprint excludes server tick but includes normalized plan identity (expected=cf45867bf122059052eccf99bdb5ae9d8f20765be10cb7ea9dfbdf1b113dc93b, actual=cf45867bf122059052eccf99bdb5ae9d8f20765be10cb7ea9dfbdf1b113dc93b)
+PASS canonical plan reconstruction verifies fingerprint (expected=cf45867bf122059052eccf99bdb5ae9d8f20765be10cb7ea9dfbdf1b113dc93b, actual=cf45867bf122059052eccf99bdb5ae9d8f20765be10cb7ea9dfbdf1b113dc93b)
+PASS fingerprint mismatch detects changed plan contents
+PASS input session requires a frozen registry
+PASS input session starts idle (expected=IDLE, actual=IDLE)
+PASS basic seal outside a session does not start a recipe (expected=IGNORED_WRONG_PHASE, actual=IGNORED_WRONG_PHASE)
+PASS repeated key-down while physically held is ignored (expected=REPEAT_KEYDOWN_IGNORED, actual=REPEAT_KEYDOWN_IGNORED)
+PASS physical release clears held-key state (expected=KEY_RELEASED, actual=KEY_RELEASED)
+PASS explicit start enters base input (expected=STARTED, actual=STARTED)
+PASS first base seal accepted (expected=INPUT_ACCEPTED, actual=INPUT_ACCEPTED)
+PASS holding a seal cannot record it twice (expected=REPEAT_KEYDOWN_IGNORED, actual=REPEAT_KEYDOWN_IGNORED)
+PASS held-key repeat leaves one input token (expected=1, actual=1)
+PASS input session exposes exact-and-longer recipe ambiguity (expected=EXACT_AND_PREFIX, actual=EXACT_AND_PREFIX)
+PASS explicit confirmation chooses the exact shorter recipe (expected=BASE_CONFIRMED, actual=BASE_CONFIRMED)
+PASS confirmed base recipe ID is stable (expected=out_of_spec:recipe/fireball, actual=out_of_spec:recipe/fireball)
+PASS base confirmation enters optional additional-seal phase (expected=ADDITIONAL_INPUT, actual=ADDITIONAL_INPUT)
+PASS additional input also exposes exact-and-longer ambiguity (expected=EXACT_AND_PREFIX, actual=EXACT_AND_PREFIX)
+PASS explicit confirmation selects the exact additional seal (expected=ADDITION_CONFIRMED, actual=ADDITION_CONFIRMED)
+PASS confirmed addition is retained in the draft plan (expected=[out_of_spec:additional/area], actual=[out_of_spec:additional/area])
+PASS registered conflict prevents adding a second incompatible seal (expected=ADDITION_CONFLICT, actual=ADDITION_CONFLICT)
+PASS conflict rejection preserves prior confirmed selection (expected=[out_of_spec:additional/area], actual=[out_of_spec:additional/area])
+PASS required addition can be selected after its prerequisite (expected=ADDITION_CONFIRMED, actual=ADDITION_CONFIRMED)
+PASS confirmed draft creates selection-only request (expected=CAST_REQUEST_READY, actual=CAST_REQUEST_READY)
+PASS request preserves addition order without client effects (expected=[out_of_spec:additional/area, out_of_spec:additional/split], actual=[out_of_spec:additional/area, out_of_spec:additional/split])
+PASS submit enters validation-pending state (expected=VALIDATING, actual=VALIDATING)
+PASS response for another request cannot approve this draft (expected=STALE_VALIDATION_IGNORED, actual=STALE_VALIDATION_IGNORED)
+PASS stale response does not change phase (expected=VALIDATING, actual=VALIDATING)
+PASS only matching server response can approve the request (expected=VALIDATION_ACCEPTED, actual=VALIDATION_ACCEPTED)
+PASS local cancel cannot undo a submitted server request or active cast (expected=TOO_LATE_TO_CANCEL, actual=TOO_LATE_TO_CANCEL)
+PASS cast end for another request is ignored (expected=STALE_CAST_END_IGNORED, actual=STALE_CAST_END_IGNORED)
+PASS matching cast completion clears transient state (expected=CAST_FINISHED, actual=CAST_FINISHED)
+PASS completed cast returns session to idle (expected=IDLE, actual=IDLE)
+PASS idle input timer returns a non-error no-timeout result (expected=NO_TIMEOUT, actual=NO_TIMEOUT)
+PASS backspace removes last unconfirmed seal (expected=BACKSPACE_APPLIED, actual=BACKSPACE_APPLIED)
+PASS backspace preserves remaining prefix (expected=[ZI], actual=[ZI])
+PASS default 800ms timeout clears unconfirmed sequence (expected=TIMED_OUT, actual=TIMED_OUT)
+PASS timeout clears input buffer only (expected=[], actual=[])
+PASS timeout does not auto-cast or end session (expected=BASE_INPUT, actual=BASE_INPUT)
+PASS prefix expires strictly after the configured interval (expected=TIMED_OUT, actual=TIMED_OUT)
+PASS post-timeout seal cannot combine with the expired prefix (expected=UNKNOWN_SEQUENCE, actual=UNKNOWN_SEQUENCE)
+PASS draft cannot submit while an addition prerequisite is absent (expected=REQUIRED_ADDITION_MISSING, actual=REQUIRED_ADDITION_MISSING)
+PASS missing prerequisite keeps the draft editable (expected=ADDITIONAL_INPUT, actual=ADDITIONAL_INPUT)
+PASS draft submits after required addition is supplied (expected=CAST_REQUEST_READY, actual=CAST_REQUEST_READY)
+PASS recoverable server rejection returns to edit phase (expected=VALIDATION_REJECTED_RECOVERABLE, actual=VALIDATION_REJECTED_RECOVERABLE)
+PASS recoverable rejection retains confirmed selections (expected=[out_of_spec:additional/split, out_of_spec:additional/area], actual=[out_of_spec:additional/split, out_of_spec:additional/area])
+PASS backspace can remove the last confirmed addition when sequence buffer is empty (expected=BACKSPACE_APPLIED, actual=BACKSPACE_APPLIED)
+PASS backspace can then remove the prior selected addition (expected=BACKSPACE_APPLIED, actual=BACKSPACE_APPLIED)
+PASS unsubmitted corrected draft can be canceled (expected=CANCELED, actual=CANCELED)
+PASS cancel clears the unsubmitted draft (expected=IDLE, actual=IDLE)
+PASS terminal server rejection clears the input session (expected=VALIDATION_REJECTED_TERMINAL, actual=VALIDATION_REJECTED_TERMINAL)
+PASS terminal rejection returns idle (expected=IDLE, actual=IDLE)
+PASS cancel clears pre-submission input (expected=CANCELED, actual=CANCELED)
+PASS cancel leaves no partial input sequence (expected=0, actual=0)
+PASS monotonic clock regression is rejected
+PASS maximum registered input length is accepted (expected=32, actual=32)
+PASS input beyond the sequence capacity is cleared safely (expected=SEQUENCE_TOO_LONG, actual=SEQUENCE_TOO_LONG)
+PASS overflow does not retain a truncated candidate (expected=0, actual=0)
+PASS all 84 Stage 2.6 model assertions
+PASS all 54 Stage 2.7 input-session assertions
+PASS all 138 combined model/input assertions
+PASS: 44 diagnostic recipe assertions.
+PASS real-casting registry is frozen
+PASS every native and add-on registry spell has a real casting recipe (expected=130, actual=130)
+PASS six additional seals are registered with concrete execution paths (expected=6, actual=6)
+PASS Magic Arrow registry ID (expected=irons_spellbooks:magic_arrow, actual=irons_spellbooks:magic_arrow)
+PASS Firebolt registry ID (expected=irons_spellbooks:firebolt, actual=irons_spellbooks:firebolt)
+PASS Lightning Lance registry ID (expected=irons_spellbooks:lightning_lance, actual=irons_spellbooks:lightning_lance)
+PASS Fireball registry ID (expected=irons_spellbooks:fireball, actual=irons_spellbooks:fireball)
+PASS ZX exact-match is Magic Arrow (expected=[out_of_spec_binding:recipe_magic_arrow], actual=[out_of_spec_binding:recipe_magic_arrow])
+PASS ZX offers Firebolt as longer recipe (expected=[out_of_spec_binding:recipe_firebolt], actual=[out_of_spec_binding:recipe_firebolt])
+PASS ZXC exact-match is Firebolt (expected=[out_of_spec_binding:recipe_firebolt], actual=[out_of_spec_binding:recipe_firebolt])
+PASS CVB exact-match is Lightning Lance (expected=[out_of_spec_binding:recipe_lightning_lance], actual=[out_of_spec_binding:recipe_lightning_lance])
+PASS XNY exact-match is Fireball (expected=[out_of_spec_binding:recipe_fireball], actual=[out_of_spec_binding:recipe_fireball])
+PASS F exact-match is normal power focus (expected=[out_of_spec_binding:power_focus], actual=[out_of_spec_binding:power_focus])
+PASS F offers FG as advanced power focus (expected=[out_of_spec_binding:power_focus_strong], actual=[out_of_spec_binding:power_focus_strong])
+PASS FG exact-match is advanced power focus (expected=[out_of_spec_binding:power_focus_strong], actual=[out_of_spec_binding:power_focus_strong])
+PASS normal and advanced focus conflict
+PASS advanced and normal focus conflict symmetrically
+PASS normal focus cannot repeat (expected=1, actual=1)
+PASS advanced focus cannot repeat (expected=1, actual=1)
+PASS normal focus effect source is additional seal (expected=ADDITIONAL_SEAL, actual=ADDITIONAL_SEAL)
+PASS normal focus only modifies spell-power value (expected=SPELL_POWER, actual=SPELL_POWER)
+PASS normal focus multiplier (expected=1.2, actual=1.2)
+PASS advanced focus multiplier (expected=1.35, actual=1.35)
+PASS recipe points to actual registered spell, not a debug ID (expected=irons_spellbooks:magic_arrow, actual=irons_spellbooks:magic_arrow)
+PASS server resolver accepts registered real recipe and executable focus
+PASS resolved plan keeps real spell ID (expected=irons_spellbooks:magic_arrow, actual=irons_spellbooks:magic_arrow)
+PASS resolved plan has one selected focus contribution (expected=1, actual=1)
+PASS resolved effect source retained (expected=ADDITIONAL_SEAL, actual=ADDITIONAL_SEAL)
+PASS resolved multiplier cannot be supplied by client (expected=1.2, actual=1.2)
+PASS advanced focus can be used with registered Fireball recipe
+PASS normal and advanced focus cannot stack
+PASS unknown recipes cannot be cast
+PASS unregistered additions cannot enter a real cast plan
+PASS preview describes spell-power calculation instead of claiming direct damage multiplier
+PASS quick release carries a real 50% effective cast-time reduction
+PASS multi-release carries one extra projectile
+PASS multi-release includes a mana-cost balancing modifier
+PASS triune release carries two extra projectiles
+PASS multi-release and triune release conflict symmetrically
+PASS fireball expansion is limited to the concrete Fireball spell
+PASS quick-release sequence is registered (expected=[out_of_spec_binding:quick_release], actual=[out_of_spec_binding:quick_release])
+PASS multi-release sequence is registered (expected=[out_of_spec_binding:multi_release], actual=[out_of_spec_binding:multi_release])
+PASS triune-release sequence is registered (expected=[out_of_spec_binding:triune_release], actual=[out_of_spec_binding:triune_release])
+PASS fireball expansion sequence is registered (expected=[out_of_spec_binding:fireball_expansion], actual=[out_of_spec_binding:fireball_expansion])
+PASS fireball expansion does not match for Magic Arrow
+PASS server resolver accepts multi-release for a supported projectile spell
+PASS triune release and fireball expansion can compose when both are applicable
+PASS multi-release variants cannot stack into an unintended projectile count
+PASS multi-release is rejected for spells without verified projectile executors
+PASS fireball-only radius expansion cannot be applied to Magic Arrow
+PASS input registry retains conflict targets so freeze-time references remain valid
+PASS a mastered additional seal remains matchable when other definitions are retained
+PASS the same session will not match a different, unlearned addition sequence
+PASS: 573 Stage 2.9/4.8 real-seal casting recipe assertions.
+PASS two-shot multi release contains two slots (expected=2, actual=2)
+PASS two-shot left offset (expected=-0.36, actual=-0.36)
+PASS two-shot right offset (expected=0.36, actual=0.36)
+PASS two-shot offsets are symmetric (expected=0.0, actual=0.0)
+PASS bilateral launch positions have visible separation
+PASS left shot diverges left visibly (expected=-5.0, actual=-5.0)
+PASS right shot diverges right visibly (expected=5.0, actual=5.0)
+PASS triune release contains three slots (expected=3, actual=3)
+PASS three-shot left offset (expected=-0.72, actual=-0.72)
+PASS three-shot center offset (expected=0.0, actual=0.0)
+PASS three-shot right offset (expected=0.72, actual=0.72)
+PASS three-shot offsets are symmetric (expected=0.0, actual=0.0)
+PASS three-shot left divergence visibly (expected=-10.0, actual=-10.0)
+PASS three-shot center remains straight (expected=0.0, actual=0.0)
+PASS three-shot right divergence visibly (expected=10.0, actual=10.0)
+PASS one native projectile is not offset (expected=0.0, actual=0.0)
+PASS zero projectiles yield no formation slots (expected=0, actual=0)
+PASS oversized formation fails closed
+PASS all 18 pure-Java projectile formation assertions
+PASS all 442 hand-pose library assertions
+PASS base source audit: Stage 3.3 gameplay features and Stage 3.4 persistent local experience, exact verified-case fast path, similar-case retrieval, isolated asynchronous Ollama prewarm/keep-alive, server-only verified learning and 180-300 second timeout support.
+PASS Stage 3.5 compile regression: ContractExperienceStore imports BindingContractJudge and SpellNameResolver from parent package.
+PASS Stage 3.5 audit: insomnia alias, fail-closed cache replay, anonymized mechanism-only experience context, strict current-request isolation, stale callback cancellation, original-text fallback when AI omits proposal, and success-state input clearing.
+PASS Stage 3.8 audit: all 26 canonical fields are serialized; server comparison gates activation; preparation is spell-scoped, separately timed, and consumed only after successful cast initiation; unsupported single-spell scopes for global-only attributes fail closed; AI creative suggestions may introduce targets only for open-ended requests, while explicit included/excluded spell scopes are protected; unsupported advanced mechanics fail closed.
+PASS carried-forward Stage 3.7 audit: Slowness I/II/III, severity-aware timed cast-root valuation, transparent score output, request isolation, and version identity.
+PASS Stage 2.6 source audit: stable IDs, 12 basic seals, immutable sequences, recipe prefix states, frozen registry, per-recipe additional-seal scope, typed effect provenance/units, server-derived binding contributions, and deterministic plan fingerprint.
+NOTE Stage 2.6: the model itself remains platform-independent; Stage 2.9 adds separate Forge network and spell-execution adapters without putting Minecraft imports into the model package.
+PASS Stage 2.7 source audit: phase separation, physical key-edge de-duplication, explicit recipe confirmation, timeout/backspace behavior, addition requirement/conflict checks, selection-only request submission, matching server-response gate, and safe cancellation boundaries.
+PASS Stage 2.7 pure-Java state machine remains platform independent; the Stage 2.8 client adapter adds rebindable seal keys and a diagnostic HUD with Stage 2.9 real-spell submission now layered on top.
+LIMIT Stage 2.7/2.8 runtime: Forge Mixin transformation, live keyboard behavior, and Minecraft gameplay still require an actual Forge build and in-game test.
+PASS Stage 2.9/Stage 5.2.2 source audit: compact top-positioned occult seal HUD; feedback/compact compile-regression guards; mastered-addition-only input matching; first-person pose data; server-authoritative cast validation; native spell invocation; and key-isolation Mixin declarations verified.
+PASS carried-forward source audit: bilateral/triune native-projectile formation, half-time quick release, standalone articulated first-person hand rig, and locally adjudicated/repaired Binding AI proposals.
+PASS standalone first-person rig audit: vanilla arm-render hook, no Punchy runtime/binary dependency, retained 180-degree local anatomical basis, seal-only centering, thickness-layered articulated fingers, twelve pose profiles, and project identity audited.
+PASS hand iteration audit: 1.12x hand-only scale, runtime contact-constraint solver, and two-hand item-interaction lock.
+PASS bilateral standalone audit: renderPlayerArm is suppressed, both hands are unconditionally emitted at renderHandsWithItems RETURN, and custom vertices are explicitly flushed.
+PASS Stage 4.5 source audit: custom + native scroll ID resolution, embedded SpellContainer API + legacy NBT fallback, explicit Forge event registration, accessible version/scan/diagnose commands, login version marker, pickup/login/tick/snapshot discovery, exact-scroll consumption, tier/level separation, weighted acquisition, live UI refresh, failure cost, manual upgrades, breakthrough branches, SAO Menu integration, bookless seals, grimoire queue, recipes, and undiscovered-name privacy.
+PASS Stage 5.2.2 UI carry-forward audit: top-positioned compact occult HUD, symmetric sigil asset and pixel-forged bezel, learnable seals with server validation, engraved contract controls, background AI/session retention, full scrollable AI transcript, first-person arm-pivot hand-sign rig with player-skin UVs and per-seal finger poses, and visible elapsed wait time.
+PASS baseline bytecode: Magic Arrow calls AbstractSpell#getSpellPower
+PASS baseline bytecode: Firebolt calls AbstractSpell#getSpellPower
+PASS baseline bytecode: Lightning Lance calls AbstractSpell#getSpellPower
+PASS baseline bytecode: Fireball calls AbstractSpell#getSpellPower
+PASS baseline API shape: spell power, cast-time, level resolution, initiate and execution entrypoints exist
+PASS baseline bytecode: Magic Arrow onCast creates MagicArrowProjectile through the real entity-spawn path
+PASS baseline bytecode: Firebolt onCast creates FireboltProjectile through the real entity-spawn path
+PASS baseline bytecode: Lightning Lance onCast creates LightningLanceProjectile through the real entity-spawn path
+PASS baseline bytecode: Fireball onCast creates MagicFireball through the real entity-spawn path
+PASS baseline API shape: FireballSpell#getRadius is the expected concrete radius hook
+PASS: Stage 2.9 spell-power / Stage 4.8 projectile-executor baseline bytecode audit.
+PASS package config: parsed 12 resource JSON files
+PASS visual assets: editable SVG parsed; 256x256 alpha PNG packaged
+PASS package config: expanded mods.toml parses and declares only OUT OF SPEC
+PASS bilateral standalone hand integration: end-of-frame draws both sides unconditionally and flushes custom vertices
+PASS build identity: Stage 5.3.25 contact-aware hand pose and two-hand interaction lock, Java 17, output path and no Punchy runtime/build dependency
+PASS package baseline: Stage 1.1 payload intact (SHA-256 ebb72ec47f22b64fbac3ab58ff96f9d0df5fe276638bb3cb57bf3b1832fd1fda)
+SKIP deep standalone merge fixture; set OUT_OF_SPEC_DEEP_PACKAGE_TEST=1 to run JDK merge integration test

@@ -1,0 +1,8 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+    }
+}
+rootProject.name = 'OUT_OF_SPEC_BindingContracts_Stage5_3_25_ContactAwareHandPoses'
